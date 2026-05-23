@@ -1,12 +1,12 @@
 # Chương 2: Làm việc với Dữ liệu Văn bản
 
 &nbsp;
-## Main Chapter Code
+## Mã chính của chương
 
 - [01_main-chapter-code](01_main-chapter-code) chứa mã chính của chương và lời giải bài tập
 
 &nbsp;
-## Bonus Materials
+## Tài liệu bổ sung
 
 - [02_bonus_bytepair-encoder](02_bonus_bytepair-encoder) chứa mã tùy chọn để benchmark các triển khai byte pair encoder khác nhau
 

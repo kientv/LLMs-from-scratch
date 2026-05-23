@@ -133,4 +133,4 @@ uv run gpt_with_kv_sharing.py \
 --n_kv_producing_layers 6
 ```
 
-In this small GPT setup, the whole model still contains the same feed-forward layers and output head. The main memory difference is in how many attention layers store K/V tensors in the cache.
+In this small GPT setup, the whole model still chứa the same feed-forward layers and output head. The main memory difference is in how many attention layers store K/V tensors in the cache.

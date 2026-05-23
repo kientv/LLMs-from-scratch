@@ -19,7 +19,7 @@ At inference time, these compressed tensors are projected back to their original
 
 (As a side note, the queries are also compressed, but only during training, not inference.)
 
-By the way, as mentioned earlier, MLA is not new in DeepSeek V3, as its [DeepSeek V2 predecessor](https://arxiv.org/abs/2405.04434) also used (and even introduced) it. Also, the V2 paper contains a few interesting ablation studies that may explain why the DeepSeek team chose MLA over GQA (see the figure below).
+By the way, as mentioned earlier, MLA is not new in DeepSeek V3, as its [DeepSeek V2 predecessor](https://arxiv.org/abs/2405.04434) also used (and even introduced) it. Also, the V2 paper chứa một few interesting ablation studies that may explain why the DeepSeek team chose MLA over GQA (see the figure below).
 
 &nbsp;
 

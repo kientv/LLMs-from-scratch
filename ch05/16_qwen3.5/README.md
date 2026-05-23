@@ -1,6 +1,6 @@
 # Qwen3.5 0.8B From Scratch
 
-This folder contains a from-scratch style implementation of [Qwen/Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B).
+This folder chứa một from-scratch style implementation of [Qwen/Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B).
 
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/qwen3.5/03.webp">
 
@@ -9,7 +9,7 @@ Qwen3.5 is based on the Qwen3-Next architecture, which I described in more detai
 <a href="https://magazine.sebastianraschka.com/p/beyond-standard-llms"><img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/qwen3.5/02.webp" width="500px"></a>
 
 Note that Qwen3.5 alternates `linear_attention` and `full_attention` layers.  
-The notebooks keep the full model flow readable while reusing the linear-attention building blocks from the [qwen3_5_transformers.py](qwen3_5_transformers.py), which contains the linear attention code from Hugging Face under an Apache version 2.0 open source license.
+The notebooks keep the full model flow readable while reusing the linear-attention building blocks from the [qwen3_5_transformers.py](qwen3_5_transformers.py), which chứa the linear attention code from Hugging Face under an Apache version 2.0 open source license.
 
 &nbsp;
 ## Files

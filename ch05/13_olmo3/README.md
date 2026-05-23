@@ -1,6 +1,6 @@
 # Olmo 3 7B and 32B From Scratch
 
-This [standalone-olmo3.ipynb](standalone-olmo3.ipynb) Jupyter notebook in this folder contains a from-scratch implementation of Olmo 3 7B and 32B and requires about 13 GB of RAM to run. 
+This [standalone-olmo3.ipynb](standalone-olmo3.ipynb) Jupyter notebook in this folder chứa một from-scratch implementation of Olmo 3 7B and 32B and requires about 13 GB of RAM to run. 
 
 The alternative [standalone-olmo3-plus-kvcache.ipynb](standalone-olmo3-plus-kv-cache.ipynb) notebook adds a KV cache for better runtime performance (but adds more code complexity). To learn more about KV caching, see my [Understanding and Coding the KV Cache in LLMs from Scratch](https://magazine.sebastianraschka.com/p/coding-the-kv-cache-in-llms) article.
 

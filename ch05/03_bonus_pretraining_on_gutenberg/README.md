@@ -1,6 +1,6 @@
 # Pretraining GPT on the Project Gutenberg Dataset
 
-The code in this directory contains code for training a small GPT model on the free books provided by Project Gutenberg.
+The code in this directory chứa mã for training a small GPT model on the free books provided by Project Gutenberg.
 
 As the Project Gutenberg website states, "the vast majority of Project Gutenberg eBooks are in the public domain in the US."
 
@@ -155,7 +155,7 @@ python -u pretraining_simple.py | tee log.txt
 &nbsp;
 > **Warning:**
 > Note that training on 1 of the ~500 Mb text files in the `gutenberg_preprocessed` folder will take approximately 4 hours on a V100 GPU.
-> The folder contains 47 files and will take approximately 200 hours (more than 1 week) to complete. You may want to run it on a smaller number of files.
+> The folder chứa 47 files and will take approximately 200 hours (more than 1 week) to complete. You may want to run it on a smaller number of files.
 
 
 &nbsp;

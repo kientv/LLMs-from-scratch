@@ -1,6 +1,6 @@
 # Qwen3 From Scratch
 
-This [standalone-qwen3.ipynb](standalone-qwen3.ipynb) Jupyter notebook in this folder contains a from-scratch implementation of Qwen3 0.6B, 1.7B, 4B, 8B, and 32B.
+This [standalone-qwen3.ipynb](standalone-qwen3.ipynb) Jupyter notebook in this folder chứa một from-scratch implementation of Qwen3 0.6B, 1.7B, 4B, 8B, and 32B.
 
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/qwen/qwen-overview.webp">
 

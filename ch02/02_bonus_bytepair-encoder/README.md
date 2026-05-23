@@ -1,4 +1,4 @@
-# Chapter 2: Working with Text Data
+# Chương 2: Working with Text Data
 
 # Chương 2: Làm việc với Dữ liệu Văn bản
 

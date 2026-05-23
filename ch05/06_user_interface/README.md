@@ -2,7 +2,7 @@
 
 
 
-This bonus folder contains code for running a ChatGPT-like user interface to interact with the pretrained LLMs from chapter 5, as shown below.
+This bonus folder chứa mã for running a ChatGPT-like user interface to interact with the pretrained LLMs from chapter 5, as shown below.
 
 
 
@@ -26,7 +26,7 @@ pip install chainlit
 &nbsp;
 ## Step 2: Run `app` code
 
-This folder contains 2 files:
+This folder chứa 2 files:
 
 1. [`app_orig.py`](app_orig.py): This file loads and uses the original GPT-2 weights from OpenAI. 
 2. [`app_own.py`](app_own.py): This file loads and uses the GPT-2 weights we generated in chapter 5. This requires that you execute the [`../01_main-chapter-code/ch05.ipynb`](../01_main-chapter-code/ch05.ipynb) file first.

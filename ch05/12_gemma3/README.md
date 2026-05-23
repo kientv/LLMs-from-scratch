@@ -1,6 +1,6 @@
 # Gemma 3 270M From Scratch
 
-This [standalone-gemma3.ipynb](standalone-gemma3.ipynb) Jupyter notebook in this folder contains a from-scratch implementation of Gemma 3 270M. It requires about 2 GB of RAM to run. 
+This [standalone-gemma3.ipynb](standalone-gemma3.ipynb) Jupyter notebook in this folder chứa một from-scratch implementation of Gemma 3 270M. It requires about 2 GB of RAM to run. 
 
 The alternative [standalone-gemma3-plus-kvcache.ipynb](standalone-gemma3-plus-kvcache.ipynb) notebook adds a KV cache for better runtime performance (but adds more code complexity). To learn more about KV caching, see my [Understanding and Coding the KV Cache in LLMs from Scratch](https://magazine.sebastianraschka.com/p/coding-the-kv-cache-in-llms) article.
 

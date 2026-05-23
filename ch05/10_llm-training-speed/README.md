@@ -4,7 +4,7 @@
 
 Note that the book is written for education purposes, meaning the original code is kept purposefully simple. This is to aid readability and ensure compatibility across different hardware, including CPUs and GPUs. However, you might be curious about some more advanced PyTorch and GPU features to make the LLM training more performant.
 
-This folder contains three code files that demonstrate performance optimizations for the LLM and the training function introduced in Chapter 5:
+This folder chứa three code files that demonstrate performance optimizations for the LLM and the training function introduced in Chapter 5:
 
 1. [`00_orig.py`](00_orig.py): The original Chapter 5 code for CPU and single-GPU training.  
    ➤ Run via: `python 00_orig.py`
@@ -28,12 +28,12 @@ I plan to expand on the differences in a more detailed write-up sometime in the 
 &nbsp;
 ## Single GPU speed comparisons
 
-As mentioned above, I plan to elaborate more on the changes in the future. For now, this section contains a simple performance overview in terms of tokens/second for each modification. All experiments were run on A100 GPUs.
+As mentioned above, I plan to elaborate more on the changes in the future. For now, this section chứa một simple performance overview in terms of tokens/second for each modification. All experiments were run on A100 GPUs.
 
 &nbsp;
 ### Baseline
 
-Note that `00_orig.py` servers as the baseline and contains no significant modification and uses the code from Chapter 5 as is besides the following:
+Note that `00_orig.py` servers as the baseline and chứa no significant modification and uses the code from Chapter 5 as is besides the following:
 
 - 4 times larger context length (which explains the relatively large memory footprint of `00_orig.py` compared to Chapter 5);
 - 4-times batch size changes (another contributor to the relatively large memory footprint of `00_orig.py`);
@@ -64,7 +64,7 @@ Allocated memory: 2.5069 GB
 Reserved memory: 26.2617 GB
 ```
 
-Note that `01_opt_single_gpu.py` contains all the modifications listed sequentially below. 
+Note that `01_opt_single_gpu.py` chứa mộtll the modifications listed sequentially below. 
 
 The comparison is always based on the average tok/sec and allocated memory after the first epoch from the previous section.
 

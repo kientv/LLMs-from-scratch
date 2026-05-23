@@ -2,7 +2,7 @@
 
 
 
-This bonus folder contains code for running a ChatGPT-like user interface to interact with the finetuned GPT-based spam classifier from chapter 6, as shown below.
+This bonus folder chứa mã for running a ChatGPT-like user interface to interact with the finetuned GPT-based spam classifier from chapter 6, as shown below.
 
 
 
@@ -26,7 +26,7 @@ pip install chainlit
 &nbsp;
 ## Step 2: Run `app` code
 
-The [`app.py`](app.py) file contains the UI code based. Open and inspect these files to learn more.
+The [`app.py`](app.py) file chứa the UI code based. Open and inspect these files to learn more.
 
 This file loads and uses the GPT-2 classifier weights we generated in chapter 6. This requires that you execute the [`../01_main-chapter-code/ch06.ipynb`](../01_main-chapter-code/ch06.ipynb) file first.
 

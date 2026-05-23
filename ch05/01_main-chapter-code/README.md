@@ -1,11 +1,11 @@
-# Chapter 5: Pretraining on Unlabeled Data
+# Chương 5: Pretraining on Unlabeled Data
 
-### Main Chapter Code
+### Mã chính của chương
 
-- [ch05.ipynb](ch05.ipynb) contains all the code as it appears in the chapter
-- [previous_chapters.py](previous_chapters.py) is a Python module that contains the `MultiHeadAttention` module and `GPTModel` class from the previous chapters, which we import in [ch05.ipynb](ch05.ipynb) to pretrain the GPT model
-- [gpt_download.py](gpt_download.py) contains the utility functions for downloading the pretrained GPT model weights
-- [exercise-solutions.ipynb](exercise-solutions.ipynb) contains the exercise solutions for this chapter
+- [ch05.ipynb](ch05.ipynb) chứa mộtll the code as it appears in the chapter
+- [previous_chapters.py](previous_chapters.py) is a Python module that chứa the `MultiHeadAttention` module and `GPTModel` class from the previous chapters, which we import in [ch05.ipynb](ch05.ipynb) to pretrain the GPT model
+- [gpt_download.py](gpt_download.py) chứa the utility functions for downloading the pretrained GPT model weights
+- [exercise-solutions.ipynb](exercise-solutions.ipynb) chứa the exercise solutions for this chapter
 
 ### Optional Code
 

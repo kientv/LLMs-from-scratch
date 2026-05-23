@@ -10,7 +10,7 @@ Both Qwen3-Next and Kimi Linear use a 3:1 ratio, meaning for every three transfo
 
 &nbsp;
 
-## Introduction and Overview
+## Introduction and Tổng quan
 
 Gated DeltaNet is a linear attention variant with inspiration from recurrent neural networks, including a gating mechanism from the [Gated Delta Networks: Improving Mamba2 with Delta Rule](https://arxiv.org/abs/2412.06464) paper. In a sense, Gated DeltaNet is a DeltaNet with Mamba-style gating, and DeltaNet is a linear attention mechanism.
 

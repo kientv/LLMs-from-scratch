@@ -1,9 +1,9 @@
-# Chapter 4: Implementing a GPT Model from Scratch To Generate Text
+# Chương 4: Implementing a GPT Model from Scratch To Generate Text
 
-### Main Chapter Code
+### Mã chính của chương
 
-- [ch04.ipynb](ch04.ipynb) contains all the code as it appears in the chapter
-- [previous_chapters.py](previous_chapters.py) is a Python module that contains the `MultiHeadAttention` module from the previous chapter, which we import in [ch04.ipynb](ch04.ipynb) to create the GPT model
+- [ch04.ipynb](ch04.ipynb) chứa mộtll the code as it appears in the chapter
+- [previous_chapters.py](previous_chapters.py) is a Python module that chứa the `MultiHeadAttention` module from the previous chapter, which we import in [ch04.ipynb](ch04.ipynb) to create the GPT model
 
 ### Optional Code
 

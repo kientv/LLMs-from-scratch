@@ -1,6 +1,6 @@
-# Chapter 7: Finetuning to Follow Instructions
+# Chương 7: Finetuning to Follow Instructions
 
-This folder contains utility code that can be used for preparing an instruction dataset.
+This folder chứa utility code that can be used for preparing an instruction dataset.
 
 Install the additional package requirements via:
 

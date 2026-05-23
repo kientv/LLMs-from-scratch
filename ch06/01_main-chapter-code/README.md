@@ -1,11 +1,11 @@
-# Chapter 6: Finetuning for Classification
+# Chương 6: Finetuning for Classification
 
-### Main Chapter Code
+### Mã chính của chương
 
-- [ch06.ipynb](ch06.ipynb) contains all the code as it appears in the chapter
-- [previous_chapters.py](previous_chapters.py)  is a Python module that contains the GPT model we coded and trained in previous chapters, alongside many utility functions, which we reuse in this chapter
-- [gpt_download.py](gpt_download.py) contains the utility functions for downloading the pretrained GPT model weights
-- [exercise-solutions.ipynb](exercise-solutions.ipynb) contains the exercise solutions for this chapter
+- [ch06.ipynb](ch06.ipynb) chứa mộtll the code as it appears in the chapter
+- [previous_chapters.py](previous_chapters.py)  is a Python module that chứa the GPT model we coded and trained in previous chapters, alongside many utility functions, which we reuse in this chapter
+- [gpt_download.py](gpt_download.py) chứa the utility functions for downloading the pretrained GPT model weights
+- [exercise-solutions.ipynb](exercise-solutions.ipynb) chứa the exercise solutions for this chapter
 
 ### Optional Code
 

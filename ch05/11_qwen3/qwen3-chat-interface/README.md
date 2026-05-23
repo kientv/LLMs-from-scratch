@@ -2,7 +2,7 @@
 
 
 
-This bonus folder contains code for running a ChatGPT-like user interface to interact with the pretrained Qwen3 model.
+This bonus folder chứa mã for running a ChatGPT-like user interface to interact with the pretrained Qwen3 model.
 
 
 
@@ -33,7 +33,7 @@ uv pip install -r requirements-extra.txt
 
 ## Step 2: Run `app` code
 
-This folder contains 2 files:
+This folder chứa 2 files:
 
 1. [`qwen3-chat-interface.py`](qwen3-chat-interface.py): This file loads and uses the Qwen3 0.6B model in thinking mode. 
 2. [`qwen3-chat-interface-multiturn.py`](qwen3-chat-interface-multiturn.py): The same as above, but configured to remember the message history.

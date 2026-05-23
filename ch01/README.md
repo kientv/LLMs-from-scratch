@@ -1,20 +1,17 @@
-# Chapter 1: Understanding Large Language Models
-
-
-&nbsp;
-## Main Chapter Code
-
-There is no code in this chapter.
-
+# Chương 1: Hiểu về Large Language Models
 
 &nbsp;
-## Bonus Materials
+## Mã nguồn chính của chương
 
-[Recommendations for Getting the Most Out of This Book](https://sebastianraschka.com/blog/2025/reading-books.html)
+Chương này không có mã nguồn.
+
+&nbsp;
+## Tài liệu bổ sung
+
+[Lời khuyên để tận dụng tối đa cuốn sách này](https://sebastianraschka.com/blog/2025/reading-books.html)
 
 
-
-In the video below, I share my personal approach to setting up a Python environment on my computer:
+Trong video bên dưới, tôi chia sẻ cách cá nhân trong việc thiết lập môi trường Python trên máy tính của mình:
 
 <br>
 <br>
@@ -24,7 +21,7 @@ In the video below, I share my personal approach to setting up a Python environm
 <br>
 <br>
 
-As an optional bonus, the following video tutorial provides an overview of the LLM development lifecycle covered in this book:
+Như một phần bổ sung tùy chọn, video hướng dẫn sau cung cấp tổng quan về vòng đời phát triển LLM được đề cập trong cuốn sách này:
 
 <br>
 <br>

@@ -2,6 +2,6 @@
 
 
 
-- [compare-bpe-tiktoken.ipynb](compare-bpe-tiktoken.ipynb) benchmarks various byte pair encoding implementations
-- [bpe_openai_gpt2.py](bpe_openai_gpt2.py) is the original bytepair encoder code used by OpenAI
+- [compare-bpe-tiktoken.ipynb](compare-bpe-tiktoken.ipynb) so sánh hiệu năng của các triển khai byte pair encoding khác nhau
+- [bpe_openai_gpt2.py](bpe_openai_gpt2.py) là mã bytepair encoder gốc được OpenAI sử dụng
 

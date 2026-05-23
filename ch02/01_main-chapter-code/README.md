@@ -1,9 +1,9 @@
-# Chapter 2: Working with Text Data
+# Chương 2: Làm việc với Dữ liệu Văn bản
 
-### Main Chapter Code
+### Mã chính của chương
 
-- [ch02.ipynb](ch02.ipynb) contains all the code as it appears in the chapter
+- [ch02.ipynb](ch02.ipynb) chứa tất cả mã như xuất hiện trong chương
 
-### Optional Code
+### Mã tùy chọn
 
-- [dataloader.ipynb](dataloader.ipynb) is a minimal notebook with the main data loading pipeline implemented in this chapter
+- [dataloader.ipynb](dataloader.ipynb) là một notebook tối giản chứa pipeline tải dữ liệu chính được triển khai trong chương này

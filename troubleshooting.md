@@ -1,42 +1,42 @@
-# Troubleshooting Guide
+# Hướng dẫn khắc phục sự cố
 
-This page collects common issues and setup tips encountered while working through the book.
-
-&nbsp;
-## Notebook Image Loading Issues
-
-The chapter notebooks use Markdown image links hosted at `https://sebastianraschka.com/images/LLMs-from-scratch-images/...`. This keeps the repository download size manageable, but it also means the images depend on the image host and your network connection.
-
-If images in the `.ipynb` notebooks do not render:
-
-- Open one of the image URLs directly in your browser, for example [https://sebastianraschka.com/images/LLMs-from-scratch-images/ch02_compressed/02.webp](https://sebastianraschka.com/images/LLMs-from-scratch-images/ch02_compressed/02.webp).
-- If the URL does not load in the browser either, the issue is likely a temporary website, DNS, VPN, proxy, firewall, or local network problem rather than a notebook problem.
-- I recommend double-checking the URL on a different device or network (e.g., try opening the image on your phone); if the image loads fine on your phone, it likely points to a VPN or firewall issue on your computer.
-- If the images also don't load on your phone, please feel  free to open GitHub [Issue](https://github.com/rasbt/LLMs-from-scratch/issues) to help me debug this further.
+Trang này tổng hợp các vấn đề thường gặp và mẹo cấu hình khi làm theo cuốn sách.
 
 &nbsp;
-## Keeping Personal Notebook Changes While Updating the Repository
+## Vấn đề tải ảnh trong notebook
 
-If you want to modify notebooks while also receiving repository updates, fork the repository first, then clone your fork. The main book notebooks are kept in sync with the printed book and are generally not changed, except for critical fixes. Most repository updates add bonus material instead.
+Các notebook trong các chương sử dụng liên kết ảnh Markdown được host tại `https://sebastianraschka.com/images/LLMs-from-scratch-images/...`. Điều này giúp giữ kích thước repo ở mức hợp lý, nhưng đồng nghĩa ảnh phụ thuộc vào máy chủ ảnh và kết nối mạng của bạn.
 
-Notebook files are JSON files, so Git diffs and merge conflicts can be hard to read. To avoid unnecessary conflicts, I recommend keeping your experiments separate from the tracked book notebooks:
+Nếu ảnh trong các `.ipynb` không hiển thị:
 
-- Copy a notebook before changing it, for example from `ch02.ipynb` to `ch02_experiments.ipynb`.
-- Keep your scratch notebooks in a separate folder or on your own branch.
-- Fetch updates from the original repository with an `upstream` remote, then merge or rebase only when you need those updates.
+- Mở trực tiếp một trong các URL ảnh trong trình duyệt, ví dụ [https://sebastianraschka.com/images/LLMs-from-scratch-images/ch02_compressed/02.webp](https://sebastianraschka.com/images/LLMs-from-scratch-images/ch02_compressed/02.webp).
+- Nếu URL không tải trong trình duyệt, vấn đề có thể là do website tạm thời, DNS, VPN, proxy, firewall, hoặc mạng cục bộ chứ không phải notebook.
+- Kiểm tra URL trên thiết bị hoặc mạng khác (ví dụ, mở ảnh trên điện thoại); nếu ảnh hiển thị trên điện thoại, có thể do VPN hoặc firewall trên máy tính của bạn.
+- Nếu ảnh cũng không hiển thị trên điện thoại, vui lòng mở một GitHub [Issue](https://github.com/rasbt/LLMs-from-scratch/issues) để tôi hỗ trợ gỡ lỗi.
 
-To create a fork and clone it:
+&nbsp;
+## Giữ thay đổi cá nhân cho notebook khi cập nhật repository
 
-1. Open [https://github.com/rasbt/LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch).
-2. Click the **Fork** button in the upper-right corner on GitHub.
-3. Clone your fork, replacing `YOUR-USERNAME` with your GitHub username:
+Nếu bạn muốn chỉnh sửa notebook nhưng vẫn nhận được cập nhật từ repository, hãy fork repo trước rồi clone fork của bạn. Các notebook chính của cuốn sách được đồng bộ với bản in và thường không thay đổi, trừ các sửa lỗi quan trọng. Hầu hết cập nhật repo là thêm tài liệu bổ sung.
+
+Notebook là file JSON, nên diff và xung đột merge có thể khó đọc. Để tránh xung đột không cần thiết, tôi khuyên bạn giữ thí nghiệm riêng biệt khỏi các notebook theo dõi của sách:
+
+- Sao chép notebook trước khi chỉnh sửa, ví dụ từ `ch02.ipynb` sang `ch02_experiments.ipynb`.
+- Giữ các notebook thử nghiệm trong thư mục riêng hoặc trên branch riêng.
+- Thêm remote `upstream` trỏ tới repo gốc để fetch cập nhật, sau đó merge hoặc rebase khi cần.
+
+Để fork và clone:
+
+1. Mở [https://github.com/rasbt/LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch).
+2. Nhấn nút **Fork** ở góc trên bên phải trên GitHub.
+3. Clone fork của bạn, thay `YOUR-USERNAME` bằng tên GitHub của bạn:
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/LLMs-from-scratch.git
 cd LLMs-from-scratch
 ```
 
-Then add the original repository as `upstream` so you can fetch future updates:
+Sau đó thêm repo gốc làm `upstream` để fetch cập nhật:
 
 ```bash
 git remote add upstream https://github.com/rasbt/LLMs-from-scratch.git
@@ -44,27 +44,27 @@ git fetch upstream
 git merge upstream/main
 ```
 
-If you do need to merge edited notebooks, consider installing [`nbdime`](https://nbdime.readthedocs.io/) to get notebook-aware diffs and merge tools:
+Nếu bạn cần merge các notebook đã chỉnh sửa, hãy cân nhắc cài đặt [`nbdime`](https://nbdime.readthedocs.io/) để có diff và công cụ merge theo notebook:
 
 ```bash
 pip install nbdime
 nbdime config-git --enable
 ```
 
-For more context, see [#1015](https://github.com/rasbt/LLMs-from-scratch/issues/1015).
+Xem thêm: [#1015](https://github.com/rasbt/LLMs-from-scratch/issues/1015).
 
 &nbsp;
-## Apple Silicon and MPS Support
+## Apple Silicon và hỗ trợ MPS
 
-Some notebooks and scripts use `cuda` when available and otherwise fall back to `cpu`, without selecting Apple's `mps` backend. This omission of `mps` support is intentional in many places because earlier PyTorch/MPS versions produced unstable or different results in several examples, especially during training and finetuning.
+Một số notebook và script sử dụng `cuda` khi có và fallback về `cpu` nếu không có, mà không chọn backend `mps` của Apple. Việc không tích hợp `mps` ở nhiều chỗ là có chủ đích vì các phiên bản PyTorch/MPS trước đây có thể tạo ra kết quả không ổn định hoặc khác biệt trong vài ví dụ, đặc biệt khi training và finetuning.
 
-If you are using an Apple Silicon Mac and see diverging losses, sharp loss spikes, poor generated text, or results that do not match the book, rerun the example on `cpu` first. For faster training with book-matching behavior, I recommend using `cuda` on a local NVIDIA GPU or a cloud GPU.
+Nếu bạn dùng Mac Apple Silicon và thấy loss khác kỳ vọng, spike, hoặc text sinh không tốt, chạy lại ví dụ trên `cpu` trước. Để huấn luyện nhanh hơn và khớp kết quả với sách, tôi khuyến nghị dùng `cuda` trên GPU NVIDIA cục bộ hoặc cloud GPU.
 
-Newer PyTorch versions may improve MPS behavior, and you can experiment with `mps` locally if you validate the results carefully. However, if you add `mps` support to a script yourself, keep in mind that CUDA-specific options such as `pin_memory=True`, `torch.compile`, and DDP/multi-GPU code may need separate guards.
+Phiên bản PyTorch mới hơn có thể cải thiện hành vi MPS; bạn có thể thử nghiệm `mps` cục bộ nếu xác thực kết quả cẩn thận. Nếu bạn thêm `mps` vào script, nhớ kiểm tra các tuỳ chọn CUDA như `pin_memory=True`, `torch.compile`, và code DDP/multi-GPU có thể cần điều kiện riêng.
 
-For more context, see [#977](https://github.com/rasbt/LLMs-from-scratch/issues/977), [#625](https://github.com/rasbt/LLMs-from-scratch/discussions/625), [#644](https://github.com/rasbt/LLMs-from-scratch/discussions/644), [#442](https://github.com/rasbt/LLMs-from-scratch/discussions/442), and [#846](https://github.com/rasbt/LLMs-from-scratch/issues/846).
+Xem thêm: [#977](https://github.com/rasbt/LLMs-from-scratch/issues/977), [#625](https://github.com/rasbt/LLMs-from-scratch/discussions/625), [#644](https://github.com/rasbt/LLMs-from-scratch/discussions/644), [#442](https://github.com/rasbt/LLMs-from-scratch/discussions/442), và [#846](https://github.com/rasbt/LLMs-from-scratch/issues/846).
 
 &nbsp;
-## Other Issues
+## Các vấn đề khác
 
-For other issues, please feel free to open a new GitHub [Issue](https://github.com/rasbt/LLMs-from-scratch/issues).
+Với các vấn đề khác, vui lòng mở GitHub [Issue](https://github.com/rasbt/LLMs-from-scratch/issues).

@@ -1,3 +1,3 @@
-# Chapter 2: Working with Text Data
+# Chương 2: Làm việc với Dữ liệu Văn bản
 
-- [dataloader-intuition.ipynb](dataloader-intuition.ipynb) contains optional (bonus) code to explain the data loader more intuitively with simple numbers rather than text.
+- [dataloader-intuition.ipynb](dataloader-intuition.ipynb) chứa mã tùy chọn (bonus) để giải thích trực quan hơn về dataloader bằng các số đơn giản thay vì văn bản.

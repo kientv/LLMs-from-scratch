@@ -150,8 +150,157 @@ For the `llms_from_scratch.llama3` usage information, please see [this bonus sec
 For more information about KV caching, please see the [KV cache README](../../ch04/03_kv-cache).
 
 
+# Gói PyPI `llms-from-scratch`
+
+Gói PyPI tùy chọn này cho phép bạn import tiện lợi mã từ các chương khác nhau của cuốn *Build a Large Language Model From Scratch*.
+
 &nbsp;
-### Qwen3 (Bonus material)
+## Cài đặt
+
+&nbsp;
+### Từ PyPI
+
+Cài đặt gói `llms-from-scratch` từ [Python Package Index](https://pypi.org/project/llms-from-scratch/) (PyPI):
+
+```bash
+pip install llms-from-scratch
+```
+
+**Ghi chú:** Nếu bạn dùng [`uv`](https://github.com/astral-sh/uv), thay `pip` bằng `uv pip` hoặc dùng `uv add`:
+
+```bash
+uv add llms-from-scratch
+```
+
+
+&nbsp;
+### Cài ở chế độ editable từ GitHub
+
+Nếu bạn muốn chỉnh sửa mã và thấy các thay đổi phản chiếu trong lúc phát triển:
+
+```bash
+git clone https://github.com/rasbt/LLMs-from-scratch.git
+cd LLMs-from-scratch
+pip install -e .
+```
+
+**Ghi chú:** Với `uv`, dùng:
+
+```bash
+uv add --editable . --dev
+```
+
+
+&nbsp;
+## Sử dụng gói
+
+Sau khi cài, bạn có thể import mã từ bất kỳ chương nào bằng:
+
+```python
+from llms_from_scratch.ch02 import GPTDatasetV1, create_dataloader_v1
+
+from llms_from_scratch.ch03 import (
+    SelfAttention_v1,
+    SelfAttention_v2,
+    CausalAttention,
+    MultiHeadAttentionWrapper,
+    MultiHeadAttention,
+    PyTorchMultiHeadAttention # Bonus: Faster variant using PyTorch's scaled_dot_product_attention
+)
+
+from llms_from_scratch.ch04 import (
+    LayerNorm,
+    GELU,
+    FeedForward,
+    TransformerBlock,
+    GPTModel,
+    GPTModelFast # Bonus: Faster variant using PyTorch's scaled_dot_product_attention
+    generate_text_simple
+)
+
+from llms_from_scratch.ch05 import (
+    generate,
+    train_model_simple,
+    evaluate_model,
+    generate_and_print_sample,
+    assign,
+    load_weights_into_gpt,
+    text_to_token_ids,
+    token_ids_to_text,
+    calc_loss_batch,
+    calc_loss_loader,
+    plot_losses,
+    download_and_load_gpt2
+)
+
+from llms_from_scratch.ch06 import (
+    download_and_unzip_spam_data,
+    create_balanced_dataset,
+    random_split,
+    SpamDataset,
+    calc_accuracy_loader,
+    evaluate_model,
+    train_classifier_simple,
+    plot_values,
+    classify_review
+)
+
+from llms_from_scratch.ch07 import (
+    download_and_load_file,
+    format_input,
+    InstructionDataset,
+    custom_collate_fn,
+    check_if_running,
+    query_model,
+    generate_model_scores
+)
+
+    
+from llms_from_scratch.appendix_a import NeuralNetwork, ToyDataset
+
+from llms_from_scratch.appendix_d import find_highest_gradient, train_model
+```
+
+
+
+&nbsp;
+### GPT-2 KV cache variant (Bonus material)
+
+```python
+from llms_from_scratch.kv_cache.gpt2 import GPTModel
+from llms_from_scratch.kv_cache.generate import generate_text_simple
+```
+
+Chi tiết về KV caching xem [KV cache README](../../ch04/03_kv-cache).
+
+
+
+&nbsp;
+
+### Llama  3 (Tài liệu bổ sung)
+
+```python
+from llms_from_scratch.llama3 import (
+		load_weights_into_llama,
+  	Llama3Model,
+    Llama3ModelFast,
+    Llama3Tokenizer,
+    ChatFormat,
+    clean_text
+)
+
+# KV cache drop-in replacements
+from llms_from_scratch.kv_cache.llama3 import Llama3Model
+from llms_from_scratch.kv_cache.generate import generate_text_simple
+```
+
+Thông tin sử dụng `llms_from_scratch.llama3` xem [phần bonus này](../../ch05/07_gpt_to_llama/README.md).
+
+Chi tiết về KV caching xem [KV cache README](../../ch04/03_kv-cache).
+
+
+&nbsp;
+### Qwen3 (Tài liệu bổ sung)
 
 ```python
 from llms_from_scratch.qwen3 import (
@@ -162,19 +311,15 @@ from llms_from_scratch.qwen3 import (
 
 # KV cache drop-in replacements
 from llms_from_scratch.kv_cache.qwen3 import Qwen3Model
-from llms_from_scratch.kv_cache.generate import (
+from llms_from_scratch.kv_cache_batched.generate import (
     generate_text_simple,
     generate_text_simple_stream
 )
 
 # KV cache drop-in replacements with batched inference support
-from llms_from_scratch.kv_cache_batched.generate import (
-    generate_text_simple,
-    generate_text_simple_stream
-)
 from llms_from_scratch.kv_cache_batched.qwen3 import Qwen3Model
 ```
 
-For the `llms_from_scratch.qwen3` usage information, please see [this bonus section](../../ch05/11_qwen3/README.md).
+Thông tin `llms_from_scratch.qwen3` xem [phần bonus này](../../ch05/11_qwen3/README.md).
 
-For more information about KV caching, please see the [KV cache README](../../ch04/03_kv-cache).
+Chi tiết về KV caching xem [KV cache README](../../ch04/03_kv-cache).

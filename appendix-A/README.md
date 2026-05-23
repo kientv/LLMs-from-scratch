@@ -1,11 +1,11 @@
-# Appendix A: Introduction to PyTorch
+# Phụ lục A: Giới thiệu về PyTorch
 
 &nbsp;
-## Main Chapter Code
+## Mã nguồn chính của phụ lục
 
-- [01_main-chapter-code](01_main-chapter-code) contains the main chapter code
+- [01_main-chapter-code](01_main-chapter-code) chứa mã chính của phụ lục
 
 &nbsp;
-## Bonus Materials
+## Tài liệu bổ sung
 
-- [02_setup-recommendations](02_setup-recommendations) contains Python installation and setup recommendations.
+- [02_setup-recommendations](02_setup-recommendations) chứa các khuyến nghị cài đặt Python và thiết lập môi trường.

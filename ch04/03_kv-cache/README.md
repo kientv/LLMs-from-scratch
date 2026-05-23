@@ -2,60 +2,62 @@
 
 
 
-**This folder implements the addition of a KV cache to the GPT model.** 
+# Tài liệu bổ sung: KV Cache
+
+**Thư mục này hiện thực việc bổ sung KV cache vào mô hình GPT.**
 
 &nbsp;
-## Overview
+## Tổng quan
 
-In short, a KV cache stores intermediate key (K) and value (V) computations for reuse during inference, which results in a substantial speed-up when generating responses. The downside is that it adds some complexity to the code, increases memory usage, and can't be used during training. However, the inference speed-ups are often well worth the trade-offs in code complexity and memory when deploying LLMs.
+Tóm tắt: KV cache lưu các tính toán trung gian của key (K) và value (V) để tái sử dụng trong quá trình suy luận, đem lại tăng tốc đáng kể khi sinh câu trả lời. Nhược điểm là làm mã phức tạp hơn, tăng tiêu thụ bộ nhớ và không thể dùng trong huấn luyện. Tuy nhiên, khi triển khai LLM, lợi ích về tốc độ suy luận thường bù đắp cho chi phí về độ phức tạp mã và bộ nhớ.
 
 &nbsp;
-## How it works
+## Cách hoạt động
 
-Imagine the LLM is generating some text. Concretely, suppose the LLM is given the following prompt: "Time flies".
+Giả sử LLM được đưa một prompt: "Time flies".
 
-The figure below shows an excerpt of the underlying attention score computation using a modified graphic from Chapter 3 with the key and value vectors highlighted:
+Hình bên dưới cho thấy một đoạn tính toán attention với các vector key và value được tô sáng (được sửa đổi từ chương 3):
 
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/kv-cache/kv-cache-attn-1.png?3" width=800>
 
-Now, as we learned in Chapters 2 and 4, LLMs generate one word (or token) at a time. Suppose the LLM generated the word "fast" so that the prompt for the next round becomes "Time flies fast". This is illustrated in the next figure below:
+Như đã học trong Chương 2 và 4, LLM sinh từng từ (token) một. Nếu mô hình sinh từ "fast" để prompt tiếp theo là "Time flies fast", thì:
 
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/kv-cache/kv-cache-attn-2.png?3" width=800>
 
-As we can see, based on comparing the previous 2 figures, the keys, and value vectors for the first two tokens are exactly the same, and it would be wasteful to recompute them in each next-token text generation round.
+So sánh hai hình trên cho thấy các key và value cho hai token đầu tiên hoàn toàn giống nhau — việc tái tính toán chúng ở mỗi bước là lãng phí.
 
-So, the idea of the KV cache is to implement a caching mechanism that stores the previously generated key and value vectors for reuse, which helps us to avoid unnecessary recomputations.
+Ý tưởng của KV cache là lưu các vector key và value đã sinh trước đó để tái sử dụng, tránh tính toán thừa.
 
 &nbsp;
 
-## KV cache implementation
+## Hiện thực KV cache
 
-There are many ways to implement a KV cache, with the main idea being that we only compute the key and value tensors for the newly generated tokens in each generation step.
+Có nhiều cách để hiện thực KV cache; ý chính là chỉ tính toán key và value cho các token mới sinh ở mỗi bước sinh.
 
-I opted for a simple one that emphasizes code readability. I think it's easiest to just scroll through the code changes to see how it's implemented.
+Ở đây tác giả chọn cách đơn giản, nhấn mạnh rõ ràng trong mã để dễ hiểu. Bạn có thể đọc nhanh các thay đổi trong mã để hiểu cách hoạt động.
 
-There are two files in this folder:
+Thư mục chứa hai file chính:
 
-1. [`gpt_ch04.py`](gpt_ch04.py): Self-contained code taken from Chapter 3 and 4 to implement the LLM and run the simple text generation function
-2. [`gpt_with_kv_cache.py`](gpt_with_kv_cache.py): The same as above, but with the necessary changes made to implement the KV cache. 
+1. [`gpt_ch04.py`](gpt_ch04.py): Mã độc lập lấy từ Chương 3 và 4 để hiện thực LLM và chạy hàm sinh văn bản đơn giản.
+2. [`gpt_with_kv_cache.py`](gpt_with_kv_cache.py): Tương tự nhưng đã bổ sung các thay đổi cần thiết để hiện thực KV cache.
 
-You can either 
+Bạn có thể:
 
-a. Open the [`gpt_with_kv_cache.py`](gpt_with_kv_cache.py) file and look out for the `# NEW` sections that mark the new changes:
+a. Mở [`gpt_with_kv_cache.py`](gpt_with_kv_cache.py) và tìm các phần được đánh dấu `# NEW` cho các thay đổi mới:
 
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/kv-cache/new-sections.png?3" width=800>
 
-b. Check out the two code files via a file diff tool of your choice to compare the changes:
+b. Hoặc so sánh hai file mã bằng công cụ diff để thấy khác biệt:
 
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/bonus/kv-cache/file-diff.png?3" width=800>
 
-To summarize the implementation details, here's a short walkthrough.
+Tóm tắt các bước hiện thực:
 
 &nbsp;
 
-### 1. Registering the cache buffers
+### 1. Đăng ký buffer cache
 
-Inside the `MultiHeadAttention` constructor we add two buffers, `cache_k` and `cache_v`, which will hold concatenated keys and values across steps:
+Trong constructor của `MultiHeadAttention` ta thêm hai buffer `cache_k` và `cache_v` để lưu key và value nối tiếp qua các bước:
 
 ```python
 self.register_buffer("cache_k", None)
@@ -64,9 +66,9 @@ self.register_buffer("cache_v", None)
 
 &nbsp;
 
-### 2. Forward pass with `use_cache` flag
+### 2. Forward với cờ `use_cache`
 
-Next, we extend the `forward` method of the `MultiHeadAttention` class to accept `use_cache` argument. After projecting the new chunk of tokens into `keys_new`, `values_new` and `queries`, we either initialize the kv cache or append to our cache:
+Mở rộng `forward` của `MultiHeadAttention` để chấp nhận tham số `use_cache`. Sau khi chiếu các token mới thành `keys_new`, `values_new` và `queries`, ta khởi tạo hoặc nối vào cache:
 
 ```python
 def forward(self, x, use_cache=False):
@@ -103,9 +105,9 @@ def forward(self, x, use_cache=False):
 &nbsp;
 
 
-### 3. Clearing the cache
+### 3. Xóa cache
 
-When generating texts, between independent sequences (for instance to text generation calls) we must reset both buffers, so we also add a cache resetting method the to the `MultiHeadAttention` class:
+Khi sinh văn bản giữa các chuỗi độc lập (ví dụ gọi hàm sinh nhiều lần), ta phải reset cả hai buffer; do đó thêm phương thức reset vào `MultiHeadAttention`:
 
 ```python
 def reset_cache(self):
@@ -115,15 +117,15 @@ def reset_cache(self):
 
 &nbsp;
 
-### 4. Propagating `use_cache` in the full model
+### 4. Truyền `use_cache` qua mô hình
 
-With the changes to the `MultiHeadAttention` class in place, we now modify the  `GPTModel` class. First, we add a position tracking for the token indices to the instructor:
+Với thay đổi ở `MultiHeadAttention`, ta cập nhật `GPTModel`: thêm tracking vị trí token:
 
 ```python
 self.current_pos = 0
 ```
 
-Then, we replace the one-liner block call with an explicit loop, passing `use_cache` through each transformer block:
+Thay vì gọi block một dòng, ta dùng vòng lặp rõ ràng để truyền `use_cache` vào từng transformer block:
 
 ```python
 def forward(self, in_idx, use_cache=False):
@@ -147,14 +149,14 @@ def forward(self, in_idx, use_cache=False):
         x = blk(x, use_cache=use_cache)
 ```
 
-The above change then also requires a small modification to the `TransformerBlock` class to accept the `use_cache` argument:
-```python
+Thay đổi này yêu cầu `TransformerBlock` chấp nhận `use_cache`:
+```
     def forward(self, x, use_cache=False):
         # ...
         self.att(x, use_cache=use_cache)
 ```
 
-Lastly, we add a model-level reset to `GPTModel` to clear all block caches at once for our convenience:
+Cuối cùng, thêm một reset mô hình để xóa cache ở tất cả block:
 
 ```python
 def reset_kv_cache(self):
@@ -165,9 +167,9 @@ def reset_kv_cache(self):
 
 &nbsp;
 
-### 5. Using the cache in generation
+### 5. Dùng cache khi sinh
 
-With the changes to the `GPTModel`, `TransformerBlock`, and `MultiHeadAttention`, finally, here's how we use the KV cache in a simple text generation function:
+Với các thay đổi ở `GPTModel`, `TransformerBlock`, `MultiHeadAttention`, ta dùng KV cache trong hàm sinh như sau:
 
 ```python
 def generate_text_simple_cached(model, idx, max_new_tokens, 
@@ -197,13 +199,12 @@ def generate_text_simple_cached(model, idx, max_new_tokens,
     return idx
 ```
 
-Note that we only feed the model the new token in c) via `logits = model(next_idx, use_cache=True)`. Without caching, we feed the model the whole input `logits = model(idx[:, -ctx_len:], use_cache=False)` as it has no stored keys and values to reuse.
+Lưu ý: ở c) ta chỉ đưa token mới vào `logits = model(next_idx, use_cache=True)`. Nếu không dùng cache, ta phải đưa toàn bộ đầu vào `logits = model(idx[:, -ctx_len:], use_cache=False)` vì không có key/value lưu sẵn.
 
 &nbsp;
+## So sánh hiệu năng đơn giản
 
-## Simple performance comparison
-
-After covering the KV cache on a conceptual level, the big question is how well it actually performs in practice on a small example. To give the implementation a try, we can run the two aforementioned code files as Python scripts, which will run the small 124 M parameter LLM to generate 200 new tokens (given a 4-token prompt "Hello, I am" to start with):
+Để thử nghiệm, chạy hai file Python trên để sinh 200 token với mô hình 124M (prompt 4 token "Hello, I am"):
 
 ```bash
 pip install -r https://raw.githubusercontent.com/rasbt/LLMs-from-scratch/refs/heads/main/requirements.txt
@@ -213,52 +214,45 @@ python gpt_ch04.py
 python gpt_with_kv_cache.py
 ```
 
-On a Mac Mini with M4 chip (CPU), the results are as follows:
+Trên Mac Mini M4 (CPU), kết quả ví dụ như sau:
 
 |                        | Tokens/sec |
 | ---------------------- | ---------- |
 | `gpt_ch04.py`          | 27         |
 | `gpt_with_kv_cache.py` | 144        |
 
-So, as we can see, we already get a ~5x speed-up with a small 124 M parameter model and a short 200-token sequence length. (Note that this implementation is optimized for code readability and not optimized for CUDA or MPS runtime speed, which would require pre-allocating tensors instead of reinstating and concatenating them.)
+Với ví dụ này, ta có ~5x tốc độ nhanh hơn cho mô hình 124M và dãy dài 200 token. (Lưu ý: triển khai ở đây ưu tiên dễ đọc mã, không tối ưu cho CUDA/MPS — tối ưu cần tiền cấp phát tensor thay vì liên tục nối.)
 
-**Note:** The model generates "gibberish" in both cases, i.e., text that looks like this: 
+**Ghi chú:** Mô hình ở ví dụ chưa được huấn luyện nên sinh ra văn bản "gibberish".
 
-> Output text: Hello, I am Featureiman Byeswickattribute argue logger Normandy Compton analogous bore ITVEGIN ministriesysics Kle functional recountrictionchangingVirgin embarrassedgl ...
+Quan trọng hơn, cả `gpt_ch04.py` và `gpt_with_kv_cache.py` sinh cùng một kết quả, chứng tỏ KV cache được hiện thực đúng (các lỗi indexing có thể gây sai lệch kết quả).
 
-This is because we haven't trained the model, yet. The next chapter trains the model, and you can use the KV-cache on the trained model (however, the KV cache is only meant to be used during inference) to generate coherent text. Here, we are using the untrained model to keep the code simple(r).
+&nbsp;
+## Ưu và nhược điểm của KV cache
 
-What's more important, though, is that both the `gpt_ch04.py` and `gpt_with_kv_cache.py` implementations produce exactly the same text. This tells us that the KV cache is implemented correctly -- it is easy to make indexing mistakes that can lead to divergent results.
+Khi độ dài dãy tăng, lợi ích và hạn chế của KV cache thể hiện rõ:
+
+- [Tốt] **Tăng hiệu năng tính toán**: Nếu không cache, attention ở bước t phải so sánh query mới với t key trước đó, dẫn tới phức tạp tích lũy O(n²). Với cache, mỗi key/value chỉ tính một lần và tái sử dụng, giảm độ phức tạp mỗi bước xuống tuyến tính O(n).
+
+- [Xấu] **Bộ nhớ tăng tuyến tính**: Mỗi token mới nối vào KV cache. Với dãy dài và mô hình lớn, KV cache có thể chiếm nhiều bộ nhớ (GPU) — có thể gây vấn đề. Một phương án là cắt ngắn cache (truncate) hoặc dùng cửa sổ trượt, nhưng điều này làm tăng độ phức tạp.
 
 
 &nbsp;
+## Tối ưu hoá KV Cache
 
-## KV cache advantages and disadvantages 
-
-As sequence length increases, the benefits and downsides of a KV cache become more pronounced in the following ways:
-
-- [Good] **Computational efficiency increases**: Without caching, the attention at step *t* must compare the new query with *t* previous keys, so the cumulative work scales quadratically, O(n²). With a cache, each key and value is computed once and then reused, reducing the total per-step complexity to linear, O(n).
-
-- [Bad] **Memory usage increases linearly**: Each new token appends to the KV cache. For long sequences and larger LLMs, the cumulative KV cache grows larger, which can consume a significant or even prohibitive amount of (GPU) memory. As a workaround, we can truncate the KV cache, but this adds even more complexity (but again, it may well be worth it when deploying LLMs.)
-
-
+Triển khai khái niệm ở trên rõ ràng nhưng để dùng thực tế (mô hình lớn, dãy dài) cần tối ưu cẩn thận.
 
 &nbsp;
-## Optimizing the KV Cache Implementation
+### Những lỗi phổ biến khi scale cache
 
-While my conceptual implementation of a KV cache above helps with clarity and is mainly geared towards code readability and educational purposes, deploying it in real-world scenarios (especially with larger models and longer sequence lengths) requires more careful optimization.
+- **Phân mảnh bộ nhớ và cấp phát lặp**: Liên tục `torch.cat` gây tắc nghẽn do cấp phát lại.
 
-&nbsp;
-### Common pitfalls when scaling the cache
-
-- **Memory fragmentation and repeated allocations**: Continuously concatenating tensors via `torch.cat` as shown earlier, leads to performance bottlenecks due to frequent memory allocation and reallocation.
-
-- **Linear growth in memory usage**: Without proper handling, the KV cache size becomes impractical for very long sequences.
+- **Bộ nhớ tăng tuyến tính**: Nếu không quản lý, cache có thể trở nên không thực tế cho dãy rất dài.
 
 &nbsp;
-#### Tip 1: Pre-allocate Memory
+#### Mẹo 1: Tiền cấp phát bộ nhớ
 
-Rather than concatenating tensors repeatedly, we could pre-allocate a sufficiently large tensor based on the expected maximum sequence length. This ensures consistent memory use and reduces overhead. In pseudo-code, this may look like as follows:
+Thay vì nối lặp, tiền cấp phát một tensor đủ lớn theo độ dài tối đa kỳ vọng giúp ổn định bộ nhớ và giảm overhead:
 
 ```python
 # Example pre-allocation for keys and values
@@ -267,13 +261,12 @@ cache_k = torch.zeros((batch_size, num_heads, max_seq_len, head_dim), device=dev
 cache_v = torch.zeros((batch_size, num_heads, max_seq_len, head_dim), device=device)
 ```
 
-During inference, we can then simply write into slices of these pre-allocated tensors.
+Trong quá trình suy luận, ta chỉ ghi vào các lát (slices) của tensor đã cấp phát.
 
 &nbsp;
-#### Tip 2: Truncate Cache via Sliding Window
+#### Mẹo 2: Truncate cache bằng Sliding Window
 
-To avoid blowing up our GPU memory, we can implement a sliding window approach with dynamic truncation. Via the sliding window, we maintain only the last `window_size` tokens in the cache:
-
+Để tránh dùng hết bộ nhớ GPU, dùng cửa sổ trượt giữ lại chỉ `window_size` token cuối:
 
 ```python
 # Sliding window cache implementation
@@ -283,12 +276,11 @@ cache_v = cache_v[:, :, -window_size:, :]
 ```
 
 &nbsp;
-#### Optimizations in practice
+#### Tối ưu trong thực tế
 
-You can find these optimizations in the [`gpt_with_kv_cache_optimized.py`](gpt_with_kv_cache_optimized.py) file. 
+Các tối ưu này có trong file [`gpt_with_kv_cache_optimized.py`](gpt_with_kv_cache_optimized.py).
 
-
-On a Mac Mini with an M4 chip (CPU), with a 200-token generation and a window size equal to the context length (to guarantee same results) below, the code runtimes compare as follows:
+Trên Mac Mini M4 với sinh 200 token và cửa sổ bằng context length, kết quả so sánh:
 
 |                                  | Tokens/sec |
 | -------------------------------- | ---------- |
@@ -296,12 +288,13 @@ On a Mac Mini with an M4 chip (CPU), with a 200-token generation and a window si
 | `gpt_with_kv_cache.py`           | 144        |
 | `gpt_with_kv_cache_optimized.py` | 166        |
 
-Unfortunately, the speed advantages disappear on CUDA devices as this is a tiny model, and the device transfer and communication outweigh the benefits of a KV cache for this small model. 
+Trên GPU, lợi ích có thể biến mất cho mô hình rất nhỏ do overhead truyền thiết bị.
 
 
 &nbsp;
-## Additional Resources
+## Tài nguyên tham khảo
 
 1. [Qwen3 from-scratch KV cache benchmarks](../../ch05/11_qwen3#pro-tip-2-speed-up-inference-with-compilation)
 2. [Llama 3 from-scratch KV cache benchmarks](../../ch05/07_gpt_to_llama/README.md#pro-tip-3-speed-up-inference-with-compilation)
-3. [Understanding and Coding the KV Cache in LLMs from Scratch](https://magazine.sebastianraschka.com/p/coding-the-kv-cache-in-llms) -- A more detailed write-up of this README
+3. [Understanding and Coding the KV Cache in LLMs from Scratch](https://magazine.sebastianraschka.com/p/coding-the-kv-cache-in-llms)
+

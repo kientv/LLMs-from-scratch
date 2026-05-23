@@ -1,19 +1,19 @@
-# Chapter 3: Coding Attention Mechanisms
+
+# Chương 3: Lập trình cơ chế Attention
 
 &nbsp;
-## Main Chapter Code
+## Mã chính của chương
 
-- [01_main-chapter-code](01_main-chapter-code) contains the main chapter code.
+- [01_main-chapter-code](01_main-chapter-code) chứa mã chính của chương.
 
 &nbsp;
-## Bonus Materials
+## Tài liệu bổ sung
 
-- [02_bonus_efficient-multihead-attention](02_bonus_efficient-multihead-attention) implements and compares different implementation variants of multihead-attention
-- [03_understanding-buffers](03_understanding-buffers) explains the idea behind PyTorch buffers, which are used to implement the causal attention mechanism in chapter 3
+- [02_bonus_efficient-multihead-attention](02_bonus_efficient-multihead-attention) triển khai và so sánh các biến thể triển khai multihead-attention
+- [03_understanding-buffers](03_understanding-buffers) giải thích ý tưởng về PyTorch buffers, được dùng để hiện thực cơ chế causal attention trong chương 3
 
 
-
-In the video below, I provide a code-along session that covers some of the chapter contents as supplementary material.
+Video dưới đây là buổi code-along bổ sung cho nội dung chương.
 
 <br>
 <br>

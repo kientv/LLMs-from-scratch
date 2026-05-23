@@ -1,10 +1,10 @@
-# Chapter 3: Coding Attention Mechanisms
+# Chương 3: Lập trình cơ chế Attention
 
-### Main Chapter Code
+### Mã chính của chương
 
-- [ch03.ipynb](ch03.ipynb) contains all the code as it appears in the chapter
+- [ch03.ipynb](ch03.ipynb) chứa tất cả mã như xuất hiện trong chương
 
-### Optional Code
+### Mã tùy chọn
 
-- [multihead-attention.ipynb](multihead-attention.ipynb) is a minimal notebook with the main data loading pipeline implemented in this chapter
+- [multihead-attention.ipynb](multihead-attention.ipynb) là một notebook tối giản chứa phần triển khai multihead-attention và pipeline tải dữ liệu từ chương 2
 

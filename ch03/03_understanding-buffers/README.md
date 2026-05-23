@@ -1,10 +1,10 @@
-# Understanding PyTorch Buffers
+# Hiểu về PyTorch Buffers
 
-- [understanding-buffers.ipynb](understanding-buffers.ipynb) explains the idea behind PyTorch buffers, which are used to implement the causal attention mechanism in chapter 3
+- [understanding-buffers.ipynb](understanding-buffers.ipynb) giải thích ý tưởng PyTorch buffers, được dùng để hiện thực cơ chế causal attention trong chương 3
 
 
 <br>
-Below is a hands-on video tutorial I recorded to explain the code:
+Dưới đây là một video thực hành tôi ghi lại để giải thích mã:
 
 <br>
 <br>
